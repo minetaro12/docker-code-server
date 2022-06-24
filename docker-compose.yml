@@ -1,0 +1,17 @@
+version: "3"
+services:
+  code:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: ghcr.io/minetaro12/code-server:amd64-latest
+    hostname: code-server
+    restart: unless-stopped
+    environment:
+      TZ: "Asia/Tokyo"
+#      PASSWORD: "password"
+    user: "1000:1000"
+    ports:
+      - 8080:8080
+    volumes:
+      - ./coder:/home/coder
