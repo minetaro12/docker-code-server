@@ -6,11 +6,12 @@ USER coder
 # Use bash shell
 ENV SHELL=/bin/bash
 
+# Install nodejs & yarn & jq & fish & openjdk & hugo & gibo & golang
 RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash - && \
     sudo curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
     sudo apt update && \
-    sudo apt install -y nodejs yarn jq fish && \
+    sudo apt install -y nodejs yarn jq fish && openjdk-17-jdk-headless \
     hugolatest=$(curl https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .assets[].browser_download_url | grep 'hugo_[1234567890.].*_Linux-64bit.deb') && \
     sudo curl -L $hugolatest -o hugo.deb && \
     sudo apt install ./hugo.deb && \
@@ -18,9 +19,15 @@ RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash - && \
     sudo apt clean && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -o /usr/local/bin/gibo && \
-    sudo chmod +x /usr/local/bin/gibo
+    sudo chmod +x /usr/local/bin/gibo && \
+    curl https://go.dev/dl/go1.18.3.linux-amd64.tar.gz -L -o go.tar.gz && \
+    sudo tar -C /usr/local -xzf go.tar.gz && \
+    rm go.tar.gz
 
 # Port
 ENV PORT=8080
+
+# Path
+ENV PATH=$PATH:/usr/local/go/bin
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "."]
