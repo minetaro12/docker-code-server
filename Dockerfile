@@ -22,11 +22,12 @@ RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash - && \
     sudo chmod +x /usr/local/bin/gibo && \
     curl https://go.dev/dl/go1.18.3.linux-amd64.tar.gz -L -o go.tar.gz && \
     sudo tar -C /usr/local -xzf go.tar.gz && \
-    rm go.tar.gz && \
-    echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc && \
-    echo 'exec fish' >> ~/.bashrc
+    rm go.tar.gz
 
 # Port
 ENV PORT=8080
+
+# Path
+ENV PATH=$PATH:/usr/local/go/bin
 
 ENTRYPOINT ["/usr/bin/entrypoint.sh", "--bind-addr", "0.0.0.0:8080", "."]

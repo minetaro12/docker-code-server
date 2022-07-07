@@ -10,12 +10,8 @@ services:
     environment:
       TZ: "Asia/Tokyo"
 #      PASSWORD: "password"
-    user: "1000:1000" #適宜変更
+    user: "1000:1000"
     ports:
       - 8080:8080
     volumes:
-      - coder:/home/coder
-      - ./workspace:/workspace
-
-volumes:
-  coder:
+      - ./coder:/home/coder
