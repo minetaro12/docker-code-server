@@ -12,7 +12,7 @@ RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
     sudo apt update && \
     sudo apt install -y nodejs yarn jq fish openjdk-17-jdk-headless && \
-    hugolatest=$(curl https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .assets[].browser_download_url | grep 'hugo_[1234567890.].*_Linux-64bit.deb') && \
+    hugolatest=$(curl https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .assets[].browser_download_url | grep 'hugo_[1234567890.].*_linux-amd64.deb') && \
     sudo curl -L $hugolatest -o hugo.deb && \
     sudo apt install ./hugo.deb && \
     sudo rm hugo.deb && \
