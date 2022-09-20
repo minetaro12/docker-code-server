@@ -20,7 +20,7 @@ RUN sudo curl -fsSL https://deb.nodesource.com/setup_18.x | sudo bash - && \
     sudo rm -rf /var/lib/apt/lists/* && \
     sudo curl -L https://raw.github.com/simonwhitaker/gibo/master/gibo -o /usr/local/bin/gibo && \
     sudo chmod +x /usr/local/bin/gibo && \
-    curl https://go.dev/dl/go1.18.4.linux-amd64.tar.gz -L -o go.tar.gz && \
+    curl https://go.dev/dl/go1.19.1.linux-amd64.tar.gz -L -o go.tar.gz && \
     sudo tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz && \
     echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc && \
